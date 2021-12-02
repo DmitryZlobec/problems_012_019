@@ -26,6 +26,7 @@ module signed_add_with_overflow
 
   assign sum = a + b;
   assign overflow = (a[3]^b[3]) ? 0: (sum[3]^a[3]);
+
 endmodule
 
 //----------------------------------------------------------------------------
