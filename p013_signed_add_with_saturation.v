@@ -16,12 +16,16 @@ module signed_add_with_saturation
   output [3:0] sum
 );
 
+  reg overflow;
+  reg [3:0] internal_sum;
   // TODO
 
   // Implement addition with saturation,
   // i.e. if the result does not fit
-  // the maximum or minimum values should be used
-
+  // the maximum or minimum values should be use
+  assign internal_sum = a+b;
+  assign overflow = (a[3]^b[3]) ? 0: (internal_sum[3]^a[3]);
+  assign sum = overflow ? a[3]? -8 : 7 : internal_sum; 
 
 endmodule
 
