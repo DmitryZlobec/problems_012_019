@@ -18,6 +18,26 @@ endmodule
 
 module one_cycle_pulse_detector (input clk, rst, a, output detected);
 
+  reg a_r;
+  reg b_r;
+
+  always @ (posedge clk)
+    if (rst)
+      begin
+        a_r <= '0;
+        b_r <= '0;  
+      end
+    else
+     begin
+        a_r <= a; 
+          if(~ a_r & a)
+            b_r<= '1;
+          else
+            b_r <= '0;
+     end
+      
+assign detected =  b_r & ~ a;
+
 
 endmodule
 

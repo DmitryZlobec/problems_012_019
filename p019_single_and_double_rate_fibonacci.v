@@ -29,6 +29,14 @@ module fibonacci_2
 
   // Implement a module that generates two fibonacci numbers per cycle
 
+  always @ (posedge clk)
+    if (rst)
+      { num, num2 } <= { 16'd1, 16'd1 };
+    else
+    begin
+      for(int i=0;i<2;i++)
+         { num, num2 } = { num2, num + num2 };   
+    end
 
 endmodule
 

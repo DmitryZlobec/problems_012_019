@@ -26,7 +26,7 @@ module left_shift_of_8_by_3_using_for_inside_generate (input  [7:0] a, output [7
     for (i = 0; i < 8; i ++)
       assign res [i] = i < 3 ? 1'b0 : a [i - 3];
   endgenerate
-
+  
 endmodule
 
 //----------------------------------------------------------------------------
@@ -35,15 +35,15 @@ module right_shift_of_N_by_S_using_right_shift_operation
 # (parameter N = 8, S = 3)
 (input  [N - 1:0] a, output [N - 1:0] res);
 
-  // TODO
+  assign res = a >> 3;  
 
 endmodule
 
 module right_shift_of_N_by_S_using_concatenation
 # (parameter N = 8, S = 3)
 (input  [N - 1:0] a, output [N - 1:0] res);
-
-  // TODO
+  
+   assign res = {3'b0 , a [N-1:S] };
 
 endmodule
 
@@ -51,15 +51,25 @@ module right_shift_of_N_by_S_using_for_inside_always
 # (parameter N = 8, S = 3)
 (input  [N - 1:0] a, output logic [N - 1:0] res);
 
-  // TODO
+always @*
+    for(int i=7;i>=0;i--)
+      res[i] = i > N-S-1 ? 1'b0: a[i+S]; 
+
 
 endmodule
 
 module right_shift_of_N_by_S_using_for_inside_generate
 # (parameter N = 8, S = 3)
 (input  [N - 1:0] a, output [N - 1:0] res);
+  
+  genvar i;
 
-  // TODO
+  generate
+
+  for(i=7;i>=0;i--)
+      assign res[i] = i > N-S-1 ? 1'b0: a[i+S]; 
+
+  endgenerate
 
 endmodule
 
