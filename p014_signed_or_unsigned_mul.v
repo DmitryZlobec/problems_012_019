@@ -53,9 +53,12 @@ always @(*) begin
   else
     int_res = a * b;
 end
-  // assign res_signed = $signed(a) * $signed(b);
-  // assign  = sign ? res_signed : a * b; 
-  assign res=sign? $signed(int_res):int_res;
+  // Don't pass test
+  // assign int_res = sign ? $signed(a) * $signed(b) : a * b;
+  
+  assign res=sign? $signed(int_res): int_res;
+
+
 
 endmodule
 
