@@ -21,7 +21,7 @@ module arithmetic_right_shift_of_N_by_S_using_for_inside_always
 
 always @*
   begin
-    for (int i=6;i>=0;i--)
+    for (int i=N-2;i>=0;i--)
       res[i] = i > N-S-1 ? a[N-1]: a[i+S]; 
     res[N-1] = a[N-1];
  end
@@ -34,11 +34,10 @@ module arithmetic_right_shift_of_N_by_S_using_for_inside_generate
 genvar i;
 
  generate
-     for(i=6;i>=0;i--)
+     for(i=N-2;i>=0;i--)
       assign res[i] = i > N-S-1 ? a[N-1]: a[i+S]; 
  endgenerate
       assign res[N-1] = a[N-1];  
-      // TODO
 endmodule
 
 //----------------------------------------------------------------------------

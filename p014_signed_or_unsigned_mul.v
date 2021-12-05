@@ -42,23 +42,13 @@ module signed_or_unsigned_mul
 );
 
 reg [2 * n - 1:0] int_res;
-  // TODO
+reg [    n - 1:0] a_i, b_i;
 
-  // Implement a module that generates either signed or unsigned result
-  // of the multiplication as requested by sign bit.
+assign a_i = sign ? a[n-1] ? {1{~ a[n-2:0]}}+1 : a : a;
+assign b_i = sign ? b[n-1] ? {1{~ b[n-2:0]}}+1 : b : b;
 
-always @(*) begin
-  if(sign)
-    int_res = $signed(a) * $signed(b);
-  else
-    int_res = a * b;
-end
-  // Don't pass test
-  // assign int_res = sign ? $signed(a) * $signed(b) : a * b;
-  
-  assign res=sign? $signed(int_res): int_res;
-
-
+assign int_res = a_i * b_i;  
+assign res  = sign  & (a[n-1] ^ b[n-1]) ? {1{~int_res[2 * n - 1:0]}}+1'b1 :  int_res ;
 
 endmodule
 
