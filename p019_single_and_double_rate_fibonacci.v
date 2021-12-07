@@ -25,6 +25,8 @@ module fibonacci_2
   output reg [15:0] num2
 );
 
+  output reg [15:0] num3;
+  output reg [15:0] num4;
   // TODO
 
   // Implement a module that generates two fibonacci numbers per cycle
@@ -34,8 +36,7 @@ module fibonacci_2
       { num, num2 } <= { 16'd1, 16'd1 };
     else
     begin
-      for(int i=0;i<2;i++)
-         { num, num2 } = { num2, num + num2 };   
+         { num, num2 } <= { num + num2, num + num2 + num2 };   
     end
 
 endmodule
