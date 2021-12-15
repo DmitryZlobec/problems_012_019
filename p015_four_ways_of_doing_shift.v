@@ -64,8 +64,14 @@ module right_shift_of_N_by_S_using_for_inside_generate
 
   generate
 
-  for(i=N-1;i>=0;i--)
-      assign res[i] = i > N-S-1 ? 1'b0: a[i+S]; 
+  for(i=0;i<N;i++)
+    if(i > N-S-1) begin
+      assign res[i] =  1'b0;
+    end
+    else begin
+      assign res[i] = a[i+S]; 
+    end
+      
   endgenerate
 
 endmodule

@@ -11,7 +11,7 @@ module arithmetic_right_shift_of_N_by_S_using_concatenation
 # (parameter N = 8, S = 3)
 (input  [N - 1:0] a, output [N - 1:0] res);
 
-   assign res = {a[N-1], {3 {a[N-1]}}, a[N-2:S]};
+   assign res = {a[N-1], {S {a[N-1]}}, a[N-2:S]};
 
 endmodule
 
@@ -34,8 +34,16 @@ module arithmetic_right_shift_of_N_by_S_using_for_inside_generate
 genvar i;
 
  generate
-     for(i=N-2;i>=0;i--)
-      assign res[i] = i > N-S-1 ? a[N-1]: a[i+S]; 
+     for(i=0;i<N-1;i++)
+     begin
+       if(i > N-S-1) begin
+          assign res[i] = a[N-1];
+       end
+       else begin
+          assign res[i] = a[i+S];    
+       end
+     end
+      
  endgenerate
       assign res[N-1] = a[N-1];  
 endmodule
